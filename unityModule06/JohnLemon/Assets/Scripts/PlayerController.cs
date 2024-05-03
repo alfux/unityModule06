@@ -1,18 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float cameraSensitivity = 1;
     public float walkAnimationSpeed = 1;
     public float turnAnimationSpeed = 1;
 
     private Animator anim = null;
-    private Vector3 rotationPoint = Vector3.zero;
-    private Vector3 lastPosition = Vector3.zero;
+    private List<GameObject> keys = null;
     private float walk = 0;
     private float turn = 0;
     private int walkID = 0;
@@ -22,16 +18,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Transform head = 
-            this.transform.Find("Root/Hips/Spine1/Spine2/Neck/Head");
-
-        if (head != null)
-        {
-            this.rotationPoint = head.transform.position
-                - this.transform.position;
-        }
-        this.lastPosition = this.transform.position;
         this.anim = this.gameObject.GetComponent<Animator>();
+        this.keys = new List<GameObject>();
         this.walkID = Animator.StringToHash("Walk");
         this.turnID = Animator.StringToHash("Turn");
         this.walk = 0;
@@ -95,50 +83,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void RotateCameraByAxis(Vector3 axis, float theta)
-    {
-        Vector3 point = this.transform.position + this.rotationPoint;
-
-        Camera.main.transform.RotateAround(
-            point,
-            axis,
-            theta * Time.deltaTime * this.cameraSensitivity
-        );
-        Camera.main.transform.LookAt(point, Vector3.up);
-    }
-
-    bool CameraInZone()
-    {
-        float dot = Vector3.Dot(Camera.main.transform.forward, Vector3.up);
-
-        return (dot < 4 * EPSILON && dot > EPSILON - 1);
-    }
-
-    void CameraControls()
-    {
-        Vector3 deltaPos = this.transform.position - this.lastPosition;
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        if (deltaPos.magnitude > Time.deltaTime)
-        {
-            Camera.main.transform.Translate(deltaPos, Space.World);
-            this.lastPosition = this.transform.position;
-        }
-        if (mouseX != 0)
-        {
-            this.RotateCameraByAxis(Vector3.up, mouseX);
-        }
-        if (mouseY != 0)
-        {
-            this.RotateCameraByAxis(Camera.main.transform.right, -mouseY);
-            if (!this.CameraInZone())
-            {
-                this.RotateCameraByAxis(Camera.main.transform.right, mouseY);
-            }
-        }
-    }
-
     void UpdateAnimation()
     {
         this.anim.SetFloat(this.walkID, this.walk);
@@ -148,7 +92,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         this.CharacterControls();
-        this.CameraControls();
         this.UpdateAnimation();
+    }
+
+    public void GetKey(GameObject key)
+    {
+        this.keys.Add(key);
+    }
+
+    public bool HasKeys(List<GameObject> keys)
+    {
+        foreach (GameObject k in keys)
+        {
+            if (!this.keys.Contains(k))
+                return (false);
+        }
+        return (true);
     }
 }
