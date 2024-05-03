@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour
         Vector3 v = this.transform.position - this.lastContact;
 
         v = Vector3.Dot(this.transform.forward, v) * this.transform.forward - v;
-        return (v.magnitude > 1.1f * this.collider.radius);
+        return (v.magnitude > 0.4);
     }
 
     void Reposition()
@@ -140,12 +140,12 @@ public class CameraController : MonoBehaviour
     {
         if (this.noRepeat)
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.C))
             {
                 this.noRepeat = false;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.C))
         {
             this.firstPerson = !this.firstPerson;
             this.noRepeat = true;
@@ -154,7 +154,7 @@ public class CameraController : MonoBehaviour
 
     void ManageAutoSwap()
     {
-        if ((this.rotationPoint - this.transform.position).magnitude < 0.1)
+        if ((this.rotationPoint - this.transform.position).magnitude < 0.4)
         {
             if (!this.FarFromLastContact())
             {

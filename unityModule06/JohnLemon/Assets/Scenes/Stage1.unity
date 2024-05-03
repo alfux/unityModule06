@@ -383,8 +383,8 @@ GameObject:
   - component: {fileID: 69668516}
   - component: {fileID: 78766412}
   - component: {fileID: 820439213}
-  - component: {fileID: 820439216}
   - component: {fileID: 820439217}
+  - component: {fileID: 820439218}
   m_Layer: 3
   m_Name: JohnLemon
   m_TagString: Player
@@ -1210,8 +1210,8 @@ Transform:
   m_GameObject: {fileID: 69243524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 1.9015809, y: 0, z: 0.13034332}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.9452, y: 0, z: 0.14148}
+  m_LocalScale: {x: 0.55806, y: 0.55806, z: 0.55806}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 69668522}
@@ -3491,27 +3491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkAnimationSpeed: 5
   turnAnimationSpeed: 5
---- !u!65 &820439216
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69243524}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.35651958, y: 1.4116789, z: 0.3732289}
-  m_Center: {x: 1.7763568e-15, y: 0.72527736, z: 0.035061687}
 --- !u!54 &820439217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3539,6 +3518,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!136 &820439218
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69243524}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.28861344
+  m_Height: 1.2982126
+  m_Direction: 1
+  m_Center: {x: -2.2541248e-14, y: 0.650579, z: 0.07479857}
 --- !u!1 &844486741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,7 +3719,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 70
   orthographic: 0
@@ -3745,8 +3747,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.055985607, y: -0.9249651, z: 0.15000945, w: -0.34467718}
-  m_LocalPosition: {x: 0.92987037, y: 1.2021785, z: 1.2126682}
+  m_LocalRotation: {x: 0.09344028, y: 0.87246054, z: -0.18404205, w: 0.4429561}
+  m_LocalPosition: {x: 1.2068081, y: 0.9285822, z: 0.6465309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3823,7 +3825,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &964736049
 MeshFilter:
