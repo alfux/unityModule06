@@ -10,20 +10,20 @@ public class CameraController : MonoBehaviour
     public PlayerController player = null;
     public GameObject model = null;
 
-    [SerializeField]private new SphereCollider collider = null;
-    [SerializeField]private Vector3 headHeight = Vector3.zero;
-    [SerializeField]private Vector3 rotationPoint = Vector3.zero;
-    [SerializeField]private Vector3 lastPlayerPos = Vector3.zero;
-    [SerializeField]private Vector3 lastContact = Vector3.zero;
-    [SerializeField]private Vector3 lastContactNormal = Vector3.zero;
-    [SerializeField]private float mouseX = 0;
-    [SerializeField]private float mouseY = 0;
-    [SerializeField]private float distance = 0;
-    [SerializeField]private float rayon = 0;
-    [SerializeField]private bool hitSomething = false;
-    [SerializeField]private bool firstPerson = false;
-    [SerializeField]private bool autoFirstPerson = false;
-    [SerializeField]private bool noRepeat = false;
+    private new SphereCollider collider = null;
+    private Vector3 headHeight = Vector3.zero;
+    private Vector3 rotationPoint = Vector3.zero;
+    private Vector3 lastPlayerPos = Vector3.zero;
+    private Vector3 lastContact = Vector3.zero;
+    private Vector3 lastContactNormal = Vector3.zero;
+    private float mouseX = 0;
+    private float mouseY = 0;
+    private float distance = 0;
+    private float rayon = 0;
+    private bool hitSomething = false;
+    private bool firstPerson = false;
+    private bool autoFirstPerson = false;
+    private bool noRepeat = false;
 
     void Start()
     {
@@ -180,7 +180,7 @@ public class CameraController : MonoBehaviour
             -this.transform.forward,
             out RaycastHit obstacle,
             Mathf.Infinity,
-            ~((1 << 2) | (1 << 3) | (1 << 6))
+            ~((1 << 2) | (1 << 3) | (1 << 6) | (1 << 7))
         );
         if (obstacle.distance < this.rayon)
         {
@@ -216,27 +216,25 @@ public class CameraController : MonoBehaviour
 
     void CrossObstacle(RaycastHit obstacle)
     {
-        float distanceToCross =
-            this.collider.radius
-            / Mathf.Abs(
-                Mathf.Sin(
-                    (Mathf.PI / 2)
-                    - Mathf.Acos(
-                        Mathf.Abs(
-                            Vector3.Dot(
-                                obstacle.normal,
-                                this.transform.forward
-                            )
-                        )
+        float distanceToCross = Mathf.Abs(
+            Mathf.Sin(
+                (Mathf.PI / 2) - Mathf.Acos(
+                    Mathf.Abs(
+                        Vector3.Dot(obstacle.normal, this.transform.forward)
                     )
                 )
             )
-        ;
-        this.transform.Translate(
-            obstacle.point - this.transform.position
-            + distanceToCross * this.transform.forward,
-            Space.World
         );
+
+        if (distanceToCross > 0.001)
+        {
+            distanceToCross = this.collider.radius / distanceToCross;
+            this.transform.Translate(
+                obstacle.point - this.transform.position
+                + distanceToCross * this.transform.forward,
+                Space.World
+            );
+        }
     }   
 
     void StayInMaxRange()

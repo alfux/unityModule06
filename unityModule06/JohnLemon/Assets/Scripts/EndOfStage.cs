@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class EndOfStage : MonoBehaviour
 {
-    void OnTriggerEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        PlayerController player;
-
-        if (col.TryGetComponent<PlayerController>(out player))
-        {
-            Debug.Log("You win!");
-        }
+        GameManager.GameOver(1);
+        Time.timeScale = 0;
     }
 }

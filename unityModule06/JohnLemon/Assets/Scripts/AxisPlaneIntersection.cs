@@ -18,8 +18,7 @@ namespace AlfuxMath
 		public AxisPlaneIntersection(
 			Vector3 axisPoint, Vector3 axis,
 			Vector3 planePoint, Vector3 planeNormal
-		)
-		{
+		) {
 			if (Mathf.Abs(axis.x) > 0.01)
 			{
 				this.XAxisNonZero(axisPoint, axis, planePoint, planeNormal);
@@ -43,8 +42,7 @@ namespace AlfuxMath
 		void XAxisNonZero(
 			Vector3 axisPoint, Vector3 axis,
 			Vector3 planePoint, Vector3 planeNormal
-		)
-		{
+		) {
 			this.matrix = new Matrix3x3(
 				-axis.y      , axis.x       , 0           ,
 				-axis.z      , 0            , axis.x      ,
@@ -61,8 +59,7 @@ namespace AlfuxMath
 		void YAxisNonZero(
 			Vector3 axisPoint, Vector3 axis,
 			Vector3 planePoint, Vector3 planeNormal
-		)
-		{
+		) {
 			this.matrix = new Matrix3x3(
 				axis.y       , -axis.x		, 0			   ,
 				0            , -axis.z		, axis.y	   ,
@@ -79,8 +76,7 @@ namespace AlfuxMath
 		void ZAxisNonZero(
 			Vector3 axisPoint, Vector3 axis,
 			Vector3 planePoint, Vector3 planeNormal
-		)
-		{
+		) {
 			this.matrix = new Matrix3x3(
 				axis.z		 , 0			, -axis.x	   ,
 				0			 , axis.z		, -axis.y	   ,
