@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject globalPostProcess = null;
+
     private Canvas canvas = null;
     private Animator anim = null;
     private int hashCode = 0;
@@ -20,6 +23,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if (this.globalPostProcess != null)
+            {
+                this.globalPostProcess.SetActive(true);
+            }
             this.canvas = this.GetComponent<Canvas>();
             this.anim = this.GetComponent<Animator>();
             this.hashCode = Animator.StringToHash("GameOver");
